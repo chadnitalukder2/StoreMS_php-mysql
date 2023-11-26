@@ -26,7 +26,7 @@ require('connection.php');
         $category_name = $data['Category_name'];
         $category_entrydate = $data['Category_entrydate'];
 
-   echo "<tr><td> $category_name</td><td> $category_entrydate </td><td>Edit</d></tr>";
+   echo "<tr><td> $category_name</td><td> $category_entrydate </td> <td><a href= '#'> Edit </a></d> </tr>";
     }
         echo "</table>"
     ?>
