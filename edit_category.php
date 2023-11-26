@@ -24,6 +24,28 @@ require('connection.php');
 
      } 
 
+      if(isset($_GET['Category_name'])){
+       $new_Category_name        = $_GET['Category_name'];
+       $new_Category_entrydate   = $_GET['Category_entrydate'];
+       $new_Category_id          = $_GET['Category_id'];
+        
+      $sql1= "UPDATE category SET 
+             Category_name='$new_Category_name', 
+             Category_entrydate='$new_Category_entrydate' 
+             WHERE Category_id  = $new_Category_id  "; 
+    
+        if($conn->query($sql1) == TRUE ){
+            echo "Update Successful";
+        }
+        else{
+            echo "Not Update";
+        }
+
+    } 
+
+
+
+
    ?>
 
    
