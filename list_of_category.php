@@ -23,10 +23,15 @@ require('connection.php');
     echo "<table><tr> <th> Category </th> <th> Date </th>  <th> Action </th></tr> ";
 
      while ($data = mysqli_fetch_assoc($query)) {
+        $category_id = $data['Category_id'];
         $category_name = $data['Category_name'];
         $category_entrydate = $data['Category_entrydate'];
 
-   echo "<tr><td> $category_name</td><td> $category_entrydate </td> <td><a href= '#'> Edit </a></d> </tr>";
+   echo "<tr>
+        <td> $category_name</td>
+        <td> $category_entrydate </td>
+        <td><a href= 'edit_category.php?id=$category_id'> Edit </a></d> 
+    </tr>";
     }
         echo "</table>"
     ?>
