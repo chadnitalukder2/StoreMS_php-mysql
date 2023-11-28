@@ -16,10 +16,11 @@ require('connection.php');
      $Product_category    =  $_GET['product_category'];
      $Product_code        =  $_GET['product_code'];
      $Product_entrydate   =  $_GET['product_entrydate'];
-   
-    $sql =" INSERT INTO product (product_name, product_category, product_code, product_entrydate)
-           VALUES ('$Product_name ', '$Product_category' , '  $Product_code ', '$Product_entrydate ')";
  
+    $sql =" INSERT INTO product (product_name, product_category, product_code, product_entrydate)
+           VALUES ('$Product_name ', '$Product_category' , '$Product_code ', '$Product_entrydate ')";
+ 
+
         if($conn->query($sql) == TRUE){
             echo "Data Inserted";
         }
@@ -45,15 +46,15 @@ require('connection.php');
             $category_id   =  $data['Category_id'];
             $category_name =  $data['Category_name'];
   
-            echo " <option name='$category_id'> $category_name </option>";
+            echo "<option value='$category_id' > $category_name </option>";
         }
         
-      ?>
+    ?>
        
     </select><br><br>
    
     Product Code : <br>
-    <input type="text" name="product_code	"><br><br>
+    <input type="text" name="product_code"><br><br>
     Product Entry Date : <br>
     <input type="date" name="product_entrydate"><br><br>
     <input type="submit" value="submit">
