@@ -12,21 +12,21 @@
 </head>
 <body>
     <?php
-    if(isset($_GET['spend_product_name'])){
+    if(isset($_GET ['spend_product_name'])){
      $spend_product_name        =  $_GET['spend_product_name'];
      $spend_product_quientity   =  $_GET['spend_product_quientity'];
      $spend_product_entrydate   =  $_GET['spend_product_entrydate'];
      
  
-    $sql = "INSERT INTO spend_product(spend_product_name, spend_product_quientity, spend_product_entrydate)
-           VALUES ('$spend_product_name', '$spend_product_quientity' , '$spend_product_entrydate')";
+    $sql ="INSERT INTO  spend_product (spend_product_name, spend_product_quientity, spend_product_entrydate)
+           VALUES ('$spend_product_name ', '$spend_product_quientity' , '$spend_product_entrydate')";
  
 
         if($conn->query($sql) == TRUE){
             echo "Data Inserted";
         }
         else{
-            echo "Data not Inserted";
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
         }
 
@@ -45,7 +45,7 @@
     </select><br><br>
    
     Product Quientity : <br>
-    <input type="text" name="spend_product_quientity"><br><br>
+    <input type="number" name="spend_product_quientity"><br><br>
     Spend Entry Date : <br>
     <input type="date" name="spend_product_entrydate"><br><br>
     <input type="submit" value="submit">
