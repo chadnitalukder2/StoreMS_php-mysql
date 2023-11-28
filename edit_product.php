@@ -24,6 +24,30 @@ require('connection.php');
          $product_code       =  $data['product_code'];
          $product_entrydate  =  $data['product_entrydate'];
       }
+
+      if(isset($_GET['product_name'])){
+            $new_product_id        =  $_GET['product_id'];
+            $new_product_name      =  $_GET['product_name'];
+            $new_product_category  =  $_GET['product_category'];
+            $new_product_code      =  $_GET['product_code'];
+            $new_product_entrydate =  $_GET['product_entrydate'];
+     
+        $sql1 = "UPDATE product
+         SET product_name    ='$new_product_name',
+           product_category  ='$new_product_category',
+           product_code      ='$new_product_code',
+           product_entrydate ='$new_product_entrydate'
+           WHERE product_id  = $new_product_id  ";
+
+
+                if($conn->query($sql1) == TRUE ){
+                    echo "Update Successful";
+                }
+                else{
+                    echo "Not Update";
+                }
+        }
+
     ?>
    
    <?php
