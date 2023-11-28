@@ -1,16 +1,16 @@
 <?php
 require('connection.php');
 
-$sql1 = "SELECT * FROM category";
+$sql1 = "SELECT * FROM product";
 $query1 = $conn->query($sql1);
 
 $data_list = array();
 
 while ($data1 = mysqli_fetch_assoc($query1)){ 
-    $Category_id   = $data1['Category_id'];
-    $Category_name = $data1['Category_name'];
+    $product_id   = $data1['product_id'];
+    $product_name = $data1['product_name'];
    
-    $data_list[$Category_id ] = $Category_name;
+    $data_list[$product_id ] = $product_name;
 }
 
 
@@ -34,20 +34,20 @@ while ($data1 = mysqli_fetch_assoc($query1)){
 
        $query = $conn->query($sql);
 
-    echo "<table><tr> <th> Product Name </th> <th> Category </th>  <th> Code </th>  <th> Action </th></tr> ";
+    echo "<table><tr> <th> Product Name </th> <th> Quientity </th> <th> Entry Date </th><th> Action </th></tr> ";
 
      while ($data = mysqli_fetch_assoc($query)) {
-        $product_id       = $data['product_id'];
-        $product_name     = $data['product_name'];
-        $product_category = $data['product_category'];
-        $product_code     = $data['product_code'];
+        $store_product_id         = $data['store_product_id'];
+        $store_product_name       = $data['store_product_name'];
+        $store_product_quientity  = $data['store_product_quientity'];
+        $store_product_entrydate  = $data['store_product_entrydate'];
 
    echo "<tr>
-        <td> $product_name </td>
-        <td> $data_list[$product_category] </td>
-        <td> $product_code </td>
+        <td> $data_list[$store_product_name]</td>
+        <td> $store_product_quientity </td>
+        <td> $store_product_entrydate </td>
 
-        <td><a href= 'edit_product.php?id=$product_id'> Edit </a></d> 
+        <td><a href= 'edit_store_product.php?id=$store_product_id'> Edit </a></d> 
     </tr>";
     }
         echo "</table>"
