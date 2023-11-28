@@ -1,5 +1,6 @@
 <?php
-require('connection.php');
+    require('connection.php');
+    require('myFunction.php');
 ?>
 
 <!DOCTYPE html>
@@ -7,81 +8,75 @@ require('connection.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Product</title>
+    <title>Store Product</title>
 </head>
 <body>
-    <?php
-      if(isset($_GET['id'])){
-         $getid = $_GET['id'];
+   <?php
+     if(isset($_GET['id'])){
+        $getid = $_GET['id'];
 
-         $sql   = "SELECT * FROM product WHERE product_id = $getid";
-         $query =  $conn->query($sql);
-         $data  =  mysqli_fetch_assoc( $query);
-   
-         $product_id         =  $data['product_id'];
-         $product_name       =  $data['product_name'];
-         $product_category   =  $data['product_category'];
-         $product_code       =  $data['product_code'];
-         $product_entrydate  =  $data['product_entrydate'];
-      }
+        $sql   = "SELECT * FROM store_product WHERE store_product_id  = $getid";
+        $query =  $conn->query($sql);
+        $data  =  mysqli_fetch_assoc( $query);
+  
+        $store_product_id         =  $data['store_product_id'];
+        $store_product_name       =  $data['store_product_name'];
+        $store_product_quientity  =  $data['store_product_quientity'];
+        $store_product_entrydate  =  $data['store_product_entrydate'];
+        
+     }
 
-      if(isset($_GET['product_name'])){
-            $new_product_id        =  $_GET['product_id'];
-            $new_product_name      =  $_GET['product_name'];
-            $new_product_category  =  $_GET['product_category'];
-            $new_product_code      =  $_GET['product_code'];
-            $new_product_entrydate =  $_GET['product_entrydate'];
-     
-        $sql1 = "UPDATE product
-         SET product_name    ='$new_product_name',
-           product_category  ='$new_product_category',
-           product_code      ='$new_product_code',
-           product_entrydate ='$new_product_entrydate'
-           WHERE product_id  = $new_product_id  ";
+     if(isset($_GET['store_product_name'])){
+        $new_store_product_id        =  $_GET['store_product_id'];
+        $new_store_product_name      =  $_GET['store_product_name'];
+        $new_store_product_quientity =  $_GET['store_product_quientity'];
+        $new_store_product_entrydate =  $_GET['store_product_entrydate'];
+ 
+        $sql1 = "UPDATE store_product
+        SET store_product_name       ='$new_store_product_name',
+            store_product_quientity  ='$new_store_product_quientity',
+            store_product_entrydate  ='$new_store_product_entrydate'
+       WHERE store_product_id  = $new_store_product_id ";
+    
+    if($conn->query($sql1) == TRUE ){
+        echo "Update Successful";
+    }
+    else{
+        echo "Not Update";
+    }
+}
 
-
-                if($conn->query($sql1) == TRUE ){
-                    echo "Update Successful";
-                }
-                else{
-                    echo "Not Update";
-                }
-        }
 
     ?>
    
-   <?php
-        $sql   = "SELECT * FROM category";
-        $query = $conn->query($sql);
-   ?>
+ 
 
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
-    Product Name : <br>
-    <input type="text" name="product_name" value="<?php echo $product_name ?>"><br><br>
-    Product Category : <br>
-    <select name="product_category">
-    <?php
-        while ($data  = mysqli_fetch_assoc($query)){
-            $category_id   =  $data['Category_id'];
-            $category_name =  $data['Category_name'];
-    ?>
    
-        <option value='<?php echo $category_id ?>' 
-        <?php if($category_id  == $product_category){echo 'selected';}  ?> >
-        <?php echo $category_name ?>
+    Product : <br>
+    <select name="store_product_name">
+    <?php
+        $sql   = "SELECT * FROM product";
+        $query = $conn->query($sql);
+
+        while ($data  = mysqli_fetch_assoc($query)){
+            $product_id   =  $data['product_id'];
+            $product_name =  $data['product_name'];
+    ?>
+        echo "<option value='<?php echo $product_id ?>' <?php if($store_product_name == $product_id ){echo 'selected';} ?>>
+        <?php echo $product_name ?>
         </option>";
-    
-    <?php  }   ?>
-        
- 
+    <?php
+ }
+  ?>
        
     </select><br><br>
    
-    Product Code : <br>
-    <input type="text" name="product_code" value="<?php echo $product_code   ?>"><br><br>
-    Product Entry Date : <br>
-    <input type="date" name="product_entrydate" value="<?php echo $product_entrydate ?>"><br><br>
-    <input type="text" name="product_id" value="<?php echo $product_id ?>" hidden>
+    Product Quientity : <br>
+    <input type="number" name="store_product_quientity" value='<?php echo $store_product_quientity ?>'><br><br>
+    Store Entry Date : <br>
+    <input type="date" name="store_product_entrydate" value='<?php echo $store_product_entrydate ?>'><br><br>
+    <input type="text" name="store_product_id" value='<?php echo $store_product_id ?>' hidden>
     <input type="submit" value="submit">
     </form>
     
