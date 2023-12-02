@@ -1,6 +1,6 @@
 <?php
     require('connection.php');
-  
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +12,7 @@
 </head>
 <body>
     <?php
+    #================POST Data====================
      if(isset($_POST ['user_email'])){
         $user_email      =  $_POST['user_email'];
         $user_password   =  $_POST['user_password'];
@@ -21,6 +22,13 @@
       
         $query = $conn->query($sql);
         if(mysqli_num_rows($query) > 0){
+            $data = mysqli_fetch_array($query);
+            $user_first_name =  $data['user_first_name'];
+            $user_last_name  =  $data['user_last_name'];
+
+            $_SESSION['user_first_name'] = $user_first_name;
+            $_SESSION['user_last_name'] = $user_last_name;
+
             header('location: index.php'); #kun location e jabe ta dibe
         }
         else{
