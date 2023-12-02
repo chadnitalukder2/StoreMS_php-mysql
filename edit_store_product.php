@@ -73,10 +73,10 @@
         </select><br><br>
        
         Product Quientity : <br>
-        <input type="number" name="store_product_quientity" value='<?php echo $store_product_quientity ?>'><br><br>
+        <input type="number" name="store_product_quientity" value='<?php echo $store_product_quientity; ?>'><br><br>
         Store Entry Date : <br>
-        <input type="date" name="store_product_entrydate" value='<?php echo $store_product_entrydate ?>'><br><br>
-        <input type="text" name="store_product_id" value='<?php echo $store_product_id ?>' hidden>
+        <input type="date" name="store_product_entrydate" value='<?php echo $store_product_entrydate; ?>'><br><br>
+        <input type="text" name="store_product_id" value='<?php echo $store_product_id; ?>' hidden>
         <input type="submit" value="submit">
     </form>
     
