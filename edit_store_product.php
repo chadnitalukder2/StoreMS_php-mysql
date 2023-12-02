@@ -59,7 +59,7 @@
         $sql   = "SELECT * FROM product";
         $query = $conn->query($sql);
 
-        while ($data  = mysqli_fetch_assoc($query)){
+        while ($data  = mysqli_fetch_array($query)){
             $product_id   =  $data['product_id'];
             $product_name =  $data['product_name'];
     ?>

@@ -11,49 +11,54 @@ require('connection.php');
 </head>
 <body>
     <?php
-      if(isset($_GET['id'])){
-         $getid = $_GET['id'];
+#===============Gat  data from product start=================================
+        if(isset($_GET['id'])){
+          $getid = $_GET['id'];
 
-         $sql   = "SELECT * FROM product WHERE product_id = $getid";
-         $query =  $conn->query($sql);
-         $data  =  mysqli_fetch_assoc( $query);
-   
-         $product_id         =  $data['product_id'];
-         $product_name       =  $data['product_name'];
-         $product_category   =  $data['product_category'];
-         $product_code       =  $data['product_code'];
-         $product_entrydate  =  $data['product_entrydate'];
-      }
+        $sql = "SELECT * FROM product
+                WHERE product_id = $getid";
+#===============show data start=================================
 
-      if(isset($_GET['product_name'])){
-            $new_product_id        =  $_GET['product_id'];
-            $new_product_name      =  $_GET['product_name'];
-            $new_product_category  =  $_GET['product_category'];
-            $new_product_code      =  $_GET['product_code'];
-            $new_product_entrydate =  $_GET['product_entrydate'];
-     
+        $query =  $conn->query($sql);
+        $data  =  mysqli_fetch_assoc($query);
+
+        $product_id         =  $data['product_id'];
+        $product_name       =  $data['product_name'];
+        $product_category   =  $data['product_category'];
+        $product_code       =  $data['product_code'];
+        $product_entrydate  =  $data['product_entrydate'];
+    }
+ #===============Get data from input start=================================
+
+    if(isset($_GET['product_name'])){
+        $new_product_id        =  $_GET['product_id'];
+        $new_product_name      =  $_GET['product_name'];
+        $new_product_category  =  $_GET['product_category'];
+        $new_product_code      =  $_GET['product_code'];
+        $new_product_entrydate =  $_GET['product_entrydate'];
+
+#===============update data start=================================
         $sql1 = "UPDATE product
-         SET product_name    ='$new_product_name',
-           product_category  ='$new_product_category',
-           product_code      ='$new_product_code',
-           product_entrydate ='$new_product_entrydate'
-           WHERE product_id  = $new_product_id  ";
+                SET product_name    ='$new_product_name',
+                    product_category  ='$new_product_category',
+                    product_code      ='$new_product_code',
+                    product_entrydate ='$new_product_entrydate'
+                WHERE product_id  = $new_product_id  ";
 
-
-                if($conn->query($sql1) == TRUE ){
-                    echo "Update Successful";
-                }
-                else{
-                    echo "Not Update";
-                }
+        if($conn->query($sql1) == TRUE ){
+             echo "Update Successful";
         }
-
+        else{
+         echo "Not Update";
+        }
+        }
     ?>
    
    <?php
         $sql   = "SELECT * FROM category";
         $query = $conn->query($sql);
-   ?>
+    ?>
+
 
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
     Product Name : <br>
@@ -70,6 +75,7 @@ require('connection.php');
         <?php if($category_id  == $product_category){echo 'selected';}  ?> >
         <?php echo $category_name ?>
         </option>";
+        
     
     <?php  }   ?>
         

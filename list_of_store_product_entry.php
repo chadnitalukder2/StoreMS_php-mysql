@@ -1,19 +1,5 @@
 <?php
 require('connection.php');
-
-$sql1 = "SELECT * FROM product";
-$query1 = $conn->query($sql1);
-
-$data_list = array();
-
-while ($data1 = mysqli_fetch_assoc($query1)){ 
-    $product_id   = $data1['product_id'];
-    $product_name = $data1['product_name'];
-   
-    $data_list[$product_id ] = $product_name;
-}
-
-
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +36,7 @@ while ($data1 = mysqli_fetch_assoc($query1)){
         <td><a href= 'edit_store_product.php?id=$store_product_id'> Edit </a></d> 
     </tr>";
     }
-        echo "</table>"
+        echo "</table>";
     ?>
 </body>
 </html>
