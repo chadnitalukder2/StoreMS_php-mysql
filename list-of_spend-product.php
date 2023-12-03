@@ -60,7 +60,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
 
        $query = $conn->query($sql);
 
-    echo "<table class='table table-bordered border-warning' ><tr> <th> Product Name </th> <th> Quientity </th> <th> Entry Date </th><th> Action </th></tr> ";
+    echo "<table class='table table-bordered border-warning' ><tr> <th> ID </th> <th> Product Name </th> <th> Quientity </th> <th> Entry Date </th><th> Action </th></tr> ";
 
     while ($data = mysqli_fetch_assoc($query)) {
         $spend_product_id         = $data['spend_product_id'];
@@ -69,6 +69,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
         $spend_product_entrydate  = $data['spend_product_entrydate'];
 
    echo "<tr>
+        <td> $spend_product_id </td>
         <td> $data_list[$spend_product_name]</td>
         <td> $spend_product_quientity </td>
         <td> $spend_product_entrydate </td>

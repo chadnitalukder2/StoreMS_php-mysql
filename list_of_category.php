@@ -46,7 +46,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
 
        $query = $conn->query($sql);
 
-    echo "<table class='table table-bordered border-warning' ><tr> <th> Category </th> <th> Date </th>  <th> Action </th></tr> ";
+    echo "<table class='table table-bordered border-warning' ><tr> <th> ID </th> <th> Category </th> <th> Date </th>  <th> Action </th></tr> ";
 
      while ($data = mysqli_fetch_assoc($query)) {
         $category_id = $data['Category_id'];
@@ -54,6 +54,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
         $category_entrydate = $data['Category_entrydate'];
 
    echo "<tr>
+        <td> $category_id</td>
         <td> $category_name</td>
         <td> $category_entrydate </td>
         <td><a href= 'edit_category.php?id=$category_id'> Edit </a></d> 

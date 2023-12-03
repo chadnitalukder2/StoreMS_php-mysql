@@ -57,7 +57,7 @@ while ($data1 = mysqli_fetch_assoc($query1)){
        $sql =  "SELECT* FROM product" ;
        $query = $conn->query($sql);
 
-    echo "<table class='table table-bordered border-warning' ><tr> <th> Product Name </th> <th> Category </th>  <th> Code </th>  <th> Action </th></tr> ";
+    echo "<table class='table table-bordered border-warning' ><tr> <th> ID </th> <th> Product Name </th> <th> Category </th>  <th> Code </th>  <th> Action </th></tr> ";
 
      while ($data = mysqli_fetch_assoc($query)) {
         $product_id       = $data['product_id'];
@@ -66,6 +66,7 @@ while ($data1 = mysqli_fetch_assoc($query1)){
         $product_code     = $data['product_code'];
 
    echo "<tr>
+        <td> $product_id </td>
         <td> $product_name </td>
         <td> $data_list[$product_category] </td>
         <td> $product_code </td>
