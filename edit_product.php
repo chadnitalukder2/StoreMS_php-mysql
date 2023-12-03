@@ -17,9 +17,27 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Product</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/e9aa5124db.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <?php
+    <div class="container bg-light">
+ <!--==================== Topbar start ================================-->
+        <div class="container-foulid border-bottom border-warning bg-warning"> 
+          <?php include('Topbar.php') ?>
+        </div>
+<!--==================== Topbar end ================================-->
+        <div class="container-foulid">
+            <div class="row ">   <!-- start of row -->
+ <!--==================== star of left ================================-->               
+                <div class="col-sm-3 bg-light p-0 m-0">
+                <?php include('leftbar.php') ?>
+                </div>
+<!--==================== end of left ================================-->  
+<!--==================== start of right ================================-->  
+                <div class="col-sm-9 border-start border-warning">
+                  <div class="container p-5">
+                  <?php
 #===============Gat  data from product start=================================
         if(isset($_GET['id'])){
           $getid = $_GET['id'];
@@ -62,14 +80,11 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
         }
         }
     ?>
-   
-   <?php
+  <?php
         $sql   = "SELECT * FROM category";
         $query = $conn->query($sql);
     ?>
-
-
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
+       <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
     Product Name : <br>
     <input type="text" name="product_name" value="<?php echo $product_name ?>"><br><br>
     Product Category : <br>
@@ -79,17 +94,14 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
             $category_id   =  $data['Category_id'];
             $category_name =  $data['Category_name'];
     ?>
-   
-        <option value='<?php echo $category_id ?>' 
+      <option value='<?php echo $category_id ?>' 
         <?php if($category_id  == $product_category){echo 'selected';}  ?> >
         <?php echo $category_name ?>
         </option>";
         
     
     <?php  }   ?>
-        
- 
-       
+
     </select><br><br>
    
     Product Code : <br>
@@ -100,6 +112,20 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
     <input type="submit" value="submit" class="btn btn-warning">
     </form>
     
+        </div>
+    </div>
+<!--==================== start of right ================================-->  
+            </div>  <!-- end of row -->
+        </div>
+<!--==================== start of bottom ================================-->  
+        <div class="container-foulid border-top border-warning">
+         <?php include('bottom.php') ?>
+        </div>
+<!--==================== end of bottom ================================-->  
+    </div> <!--  end of container -->
+
+  
+
 </body>
 </html>
 <?php } 

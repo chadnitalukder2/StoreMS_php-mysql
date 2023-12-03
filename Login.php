@@ -12,7 +12,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/e9aa5124db.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
+    <div class="container ">
     <?php
     #================POST Data====================
      if(isset($_POST ['user_email'])){
@@ -39,17 +41,20 @@
         }
        
     ?>
+       <form class="bg-light" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+  
+  User's Email : <br>
+  <input type="email" name="user_email"><br><br>
+  User's Password : <br>
+  <input type="password" name="user_password"><br><br>
+  <input type="submit" value="Login"class="btn btn-warning">
+  </form>
+    </div>
+    
    
  
 
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-  
-    User's Email : <br>
-    <input type="email" name="user_email"><br><br>
-    User's Password : <br>
-    <input type="password" name="user_password"><br><br>
-    <input type="submit" value="Login"class="btn btn-warning">
-    </form>
+ 
     
 </body>
 </html>
