@@ -1,6 +1,6 @@
-<h5 class="bg-warning text-black p-2">Category</h5>
+<h5 class="bg-warning text-black p-2 mt-2">Category</h5>
                     <ul class="list-group m-2">
-                        <li class="list-group-item">
+                        <li class="list-group-item ">
                             <a href="add_category.php" class="text-dark text-decoration-none">
                              Add Category</a>
                         </li>

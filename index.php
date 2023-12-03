@@ -21,7 +21,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
 <body>
     <div class="container bg-light">
  <!--==================== Topbar start ================================-->
-        <div class="container-foulid border-bottom border-warning"> 
+        <div class="container-foulid border-bottom border-warning bg-warning"> 
           <?php include('Topbar.php') ?>
         </div>
 <!--==================== Topbar end ================================-->
