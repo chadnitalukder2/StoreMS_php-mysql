@@ -75,7 +75,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
         User's Password : <br>
         <input type="password" name="user_password" value="<?php echo $user_password; ?>"><br><br>
         <input type="text" name="user_id" value="<?php echo $user_id; ?>"><br><br>
-        <input type="submit" value="submit">
+        <input type="submit" value="submit" class="btn btn-warning">
     </form>
     
 </body>

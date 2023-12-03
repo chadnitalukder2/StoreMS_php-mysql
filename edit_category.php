@@ -66,7 +66,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
     Category Entry Date : <br>
     <input type="date" name="Category_entrydate" value="<?php echo  $Category_entrydate  ?>"><br><br>
     <input type="text" name="Category_id" value="<?php echo  $Category_id  ?> "hidden>
-    <input type="submit" value="submit">
+    <input type="submit" value="submit" class="btn btn-warning">
     </form>
     
 </body>

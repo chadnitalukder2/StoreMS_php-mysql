@@ -86,7 +86,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
         Store Entry Date : <br>
         <input type="date" name="store_product_entrydate" value='<?php echo $store_product_entrydate; ?>'><br><br>
         <input type="text" name="store_product_id" value='<?php echo $store_product_id; ?>' hidden>
-        <input type="submit" value="submit">
+        <input type="submit" value="submit" class="btn btn-warning">
     </form>
     
 </body>
