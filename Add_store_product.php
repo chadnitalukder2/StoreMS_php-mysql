@@ -271,18 +271,13 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
           <div class="col-lg-12">
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Add Product</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Add Store Product</h6>
                 </div>
                 <div class="card-body">
                   <form>
+                  
                     <div class="form-group">
-                      <label for="exampleInputCategory">Product Name</label>
-                      <input type="Text"  name="product_name" class="form-control" id="exampleInputCategory" aria-describedby="emailHelp"
-                        placeholder="Enter Product name">
-                    </div>
-
-                    <div class="form-group">
-                    <label for="select2Single">Product Category</label>
+                    <label for="select2Single">Product Name</label>
                     <select class="select2-single form-control" name="product_category" id="select2Single">
                     <?php
                         while ($data  = mysqli_fetch_assoc($query)){
@@ -297,13 +292,14 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
                   </div>
 
                   <div class="form-group">
-                      <label for="exampleInputCategory">Product Code</label>
-                      <input type="Text" name="product_code" class="form-control" id="exampleInputCategory" aria-describedby="emailHelp"
-                        placeholder="Enter Product Code">
+                      <label for="exampleInputCategory">Product Quientity</label>
+                      <input type="Text"  name="product_name" class="form-control" id="exampleInputCategory" aria-describedby="emailHelp"
+                        placeholder="Enter Product name">
                     </div>
 
+
                     <div class="form-group" id="simple-date1">
-                    <label for="simpleDataInput">Product Entry Date</label>
+                    <label for="simpleDataInput">Store Entry Date </label>
                       <div class="input-group date">
                         <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fas fa-calendar"></i></span>

@@ -54,7 +54,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Store Product</h6>
             <a class="collapse-item" href="Add_store_product.php">Add Store Product</a>
-            <a class="collapse-item" href="">List Of Store Product</a>
+            <a class="collapse-item" href="List_of_store_product.php">List Of Store Product</a>
           </div>
         </div>
       </li>
@@ -67,8 +67,8 @@
         <div id="collapseSpend" class="collapse" aria-labelledby="headingSpend" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Spend Product</h6>
-            <a class="collapse-item" href="simple-tables.html">Add Spend Product</a>
-            <a class="collapse-item" href="datatables.html">List Of Spend Product</a>
+            <a class="collapse-item" href="Add_spend_product.php">Add Spend Product</a>
+            <a class="collapse-item" href="List_of_spend_product.php">List Of Spend Product</a>
           </div>
         </div>
       </li>
