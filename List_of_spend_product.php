@@ -13,8 +13,17 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
 ?>
 
 <?php
-       $sql =  "SELECT* FROM category" ;
-       $query = $conn->query($sql);
+      $sql1 = "SELECT * FROM product";
+      $query1 = $conn->query($sql1);
+      
+      $data_list = array();
+      
+      while ($data1 = mysqli_fetch_assoc($query1)){ 
+          $product_id   = $data1['product_id'];
+          $product_name = $data1['product_name'];
+         
+          $data_list[$product_id ] = $product_name;
+      }
 ?>
 
 <!DOCTYPE html>

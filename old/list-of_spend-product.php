@@ -1,6 +1,15 @@
 <?php
 require('connection.php');
 
+#=====================login page start=================
+session_start();
+$user_first_name = $_SESSION['user_first_name'];
+$user_last_name  = $_SESSION['user_last_name'];
+
+if(!empty($user_first_name) && !empty($user_last_name) ){  
+
+#=====================login page end=================
+
 $sql1 = "SELECT * FROM product";
 $query1 = $conn->query($sql1);
 
@@ -13,14 +22,7 @@ while ($data1 = mysqli_fetch_assoc($query1)){
     $data_list[$product_id ] = $product_name;
 }
 
-#=====================login page start=================
-session_start();
-$user_first_name = $_SESSION['user_first_name'];
-$user_last_name  = $_SESSION['user_last_name'];
 
-if(!empty($user_first_name) && !empty($user_last_name) ){  
-
-#=====================login page end=================
 ?>
 
 <!DOCTYPE html>

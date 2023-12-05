@@ -11,12 +11,20 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
 #=====================login page end=================
 
 ?>
-
 <?php
-       $sql =  "SELECT* FROM category" ;
-       $query = $conn->query($sql);
-?>
+$sql1 = "SELECT * FROM product";
+$query1 = $conn->query($sql1);
 
+$data_list = array();
+
+while ($data1 = mysqli_fetch_assoc($query1)){ 
+    $product_id   = $data1['product_id'];
+    $product_name = $data1['product_name'];
+   
+    $data_list[$product_id ] = $product_name;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -269,19 +277,23 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
                     </tfoot>
                     <tbody>
                    <?php
+                        $sql =  "SELECT* FROM store_product" ;
+                        $query = $conn->query($sql);
                    $sl= 0;
-                             while ($data = mysqli_fetch_assoc($query)) {
-                                $category_id = $data['Category_id'];
-                                $category_name = $data['Category_name'];
-                                $category_entrydate = $data['Category_entrydate'];
+                   while ($data = mysqli_fetch_assoc($query)) {
+                    $store_product_id         = $data['store_product_id'];
+                    $store_product_name       = $data['store_product_name'];
+                    $store_product_quientity  = $data['store_product_quientity'];
+                    $store_product_entrydate  = $data['store_product_entrydate'];
                                 $sl++
                     ?>
                       <tr>
                       <td><?php echo $sl; ?></td>
-                        <td><?php echo $category_name; ?></td>
-                        <td><?php echo $category_entrydate; ?></td>
+                        <td><?php echo $data_list[$store_product_name]; ?></td>
+                        <td><?php echo $store_product_quientity; ?></td>
+                        <td><?php echo $store_product_entrydate; ?></td>
                         <td>
-                           <a href="edit_store_product.php?id=<?php echo $category_id ; ?>" class=" btn btn-info">
+                           <a href="edit_store_product.php?id=<?php echo $store_product_id ; ?>" class=" btn btn-info">
                               <i class="fas fa-edit"></i>
                             </a>
 
