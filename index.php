@@ -1,3 +1,42 @@
+<?php
+require('connection.php');
+
+#=====================login page start=================
+session_start();
+$user_first_name = $_SESSION['user_first_name'];
+$user_last_name  = $_SESSION['user_last_name'];
+
+if(!empty($user_first_name) && !empty($user_last_name) ){  
+?>
+ <!-- #=====================login page end================= -->
+
+<!-- #=====================Total Category================= -->
+<?php
+       $sql =  "SELECT* FROM category" ;
+       $query = $conn->query($sql);
+
+      $total_category =  mysqli_num_rows($query);
+?>
+<!-- #=====================Total Product================= -->
+<?php
+      $sql1 =  "SELECT* FROM product" ;
+      $query1 = $conn->query($sql1);
+      $total_product =  mysqli_num_rows($query1);
+?>
+<!-- #=====================Total Store Product================= -->
+<?php
+ $sql2 =  "SELECT* FROM store_product" ;
+ $query2 = $conn->query($sql2);
+
+ $total_store_product =  mysqli_num_rows($query2);
+?>
+<!-- #=====================Total Spent Product================= -->
+<?php
+   $sql3 =  "SELECT* FROM spend_product";
+   $query3 = $conn->query($sql3);
+
+   $total_spend_product =  mysqli_num_rows($query3);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -227,8 +266,8 @@
                 <div class="card-body">
                   <div class="row align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Total Product</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">40,000</div>
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Total Category</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $total_category; ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-primary"></i>
@@ -243,8 +282,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Total Category</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">650</div>
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Total Product</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo  $total_product;?> </div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-shopping-cart fa-2x text-success"></i>
@@ -260,7 +299,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-uppercase mb-1">Total Store Product</div>
-                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">366</div>
+                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?php  echo  $total_store_product ; ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-users fa-2x text-info"></i>
@@ -276,7 +315,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-uppercase mb-1">Total Spend Product</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php  echo  $total_spend_product; ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-warning"></i>
@@ -404,3 +443,8 @@
 </body>
 
 </html>
+<?php
+ }else{
+    header('location: login.php');
+}
+?>

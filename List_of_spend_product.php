@@ -278,19 +278,23 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
                     </tfoot>
                     <tbody>
                    <?php
-                   $sl= 0;
-                             while ($data = mysqli_fetch_assoc($query)) {
-                                $category_id = $data['Category_id'];
-                                $category_name = $data['Category_name'];
-                                $category_entrydate = $data['Category_entrydate'];
+                    $sql =  "SELECT* FROM spend_product" ;
+                    $query = $conn->query($sql);
+                    $sl= 0;
+                              while ($data = mysqli_fetch_assoc($query)) {
+                                $spend_product_id         = $data['spend_product_id'];
+                                $spend_product_name       = $data['spend_product_name'];
+                                $spend_product_quientity  = $data['spend_product_quientity'];
+                                $spend_product_entrydate  = $data['spend_product_entrydate'];
                                 $sl++
                     ?>
                       <tr>
                       <td><?php echo $sl; ?></td>
-                        <td><?php echo $category_name; ?></td>
-                        <td><?php echo $category_entrydate; ?></td>
+                        <td><?php echo  $data_list[$spend_product_name]; ?></td>
+                        <td><?php echo $spend_product_quientity; ?></td>
+                        <td><?php echo $spend_product_entrydate; ?></td>
                         <td>
-                           <a href="edit_category.php?id=<?php echo $category_id ; ?>" class=" btn btn-info">
+                           <a href="edit_spend_product.php?id=<?php echo $spend_product_id ; ?>" class=" btn btn-info">
                               <i class="fas fa-edit"></i>
                             </a>
 

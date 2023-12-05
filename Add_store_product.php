@@ -24,6 +24,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
 
         if($conn->query($sql) == TRUE){
             echo "Data Inserted";
+            header('location: List_of_store_product.php'); #data insert korar por direct list page e jabe
         }
         else{
             echo "Data not Inserted";
