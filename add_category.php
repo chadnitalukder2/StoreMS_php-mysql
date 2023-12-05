@@ -7,15 +7,30 @@ $user_first_name = $_SESSION['user_first_name'];
 $user_last_name  = $_SESSION['user_last_name'];
 
 if(!empty($user_first_name) && !empty($user_last_name) ){  
-
-#=====================login page end=================
-
 ?>
+<!-- =====================login page end================= -->
+
+
 
 <?php
-       $sql =  "SELECT* FROM category" ;
-       $query = $conn->query($sql);
-?>
+    if(isset($_GET ['Category_name'])){
+     $Category_name         =  $_GET['Category_name'];
+    $Category_entrydate   =  $_GET['Category_entrydate'];
+   
+    $sql =" INSERT INTO category (Category_name,Category_entrydate)
+           VALUES ('$Category_name ', '$Category_entrydate ')";
+ 
+        if($conn->query($sql) == TRUE){
+            echo "Data Inserted";
+        }
+        else{
+            echo "Data not Inserted";
+        }
+        }
+
+      $date = date('d/m/Y');
+
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -245,38 +260,28 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
           </div>
 
           <div class="row mb-3">
-
+ <!-- insert category -->
           <div class="col-lg-12">
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">DataTables</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Insert Category</h6>
                 </div>
                 <div class="card-body">
                   <form>
                     <div class="form-group">
-                      <label for="exampleInputCategory">Email address</label>
-                      <input type="Text" class="form-control" id="exampleInputCategory" aria-describedby="emailHelp"
+                      <label for="exampleInputCategory">Category Name</label>
+                      <input type="Text" name="Category_name" class="form-control" id="exampleInputCategory" aria-describedby="emailHelp"
                         placeholder="Enter Category">
                     </div>
-                    <div class="form-group">       
-                    </div>
-                    <div class="form-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label" for="customFile">Choose file</label>
-                      </div>
-                    </div>
-
                     <div class="form-group" id="simple-date1">
                     <label for="simpleDataInput">Simple Data Input</label>
                       <div class="input-group date">
                         <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                         </div>
-                        <input type="text" class="form-control" value="01/06/2020" id="simpleDataInput">
+                        <input type="text" name="Category_entrydate" class="form-control" value="<?php echo $date ;  ?>" id="simpleDataInput">
                       </div>
                   </div>
-
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
                 </div>
