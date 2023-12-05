@@ -55,7 +55,7 @@ while ($data1 = mysqli_fetch_assoc($query1)){
 <!--==================== start of right ================================-->  
             <div class="col-sm-9 border-start border-warning">
                       <div class="container p-5 ">
-                      <?php
+    <?php
        $sql =  "SELECT* FROM store_product" ;
        $query = $conn->query($sql);
 

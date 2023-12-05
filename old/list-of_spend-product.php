@@ -59,7 +59,6 @@ while ($data1 = mysqli_fetch_assoc($query1)){
                       <div class="container  p-5">
  <?php
        $sql =  "SELECT* FROM spend_product" ;
-
        $query = $conn->query($sql);
 
     echo "<table class='table table-bordered border-warning' ><tr> <th> ID </th> <th> Product Name </th> <th> Quientity </th> <th> Entry Date </th><th> Action </th></tr> ";

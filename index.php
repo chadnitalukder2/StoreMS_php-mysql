@@ -12,31 +12,68 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
 
 <!-- #=====================Total Category================= -->
 <?php
-       $sql =  "SELECT* FROM category" ;
-       $query = $conn->query($sql);
+       $sql1 =  "SELECT* FROM category" ;
+       $query1 = $conn->query($sql1);
 
-      $total_category =  mysqli_num_rows($query);
+      $total_category =  mysqli_num_rows($query1);
 ?>
 <!-- #=====================Total Product================= -->
 <?php
-      $sql1 =  "SELECT* FROM product" ;
-      $query1 = $conn->query($sql1);
-      $total_product =  mysqli_num_rows($query1);
+      $sql2 =  "SELECT* FROM product" ;
+      $query2 = $conn->query($sql2);
+      $total_product =  mysqli_num_rows($query2);
 ?>
 <!-- #=====================Total Store Product================= -->
 <?php
- $sql2 =  "SELECT* FROM store_product" ;
- $query2 = $conn->query($sql2);
+ $sql3 =  "SELECT* FROM store_product" ;
+ $query3 = $conn->query($sql3);
 
- $total_store_product =  mysqli_num_rows($query2);
+ $total_store_product =  mysqli_num_rows($query3);
 ?>
 <!-- #=====================Total Spent Product================= -->
 <?php
-   $sql3 =  "SELECT* FROM spend_product";
-   $query3 = $conn->query($sql3);
+   $sql4 =  "SELECT* FROM spend_product";
+   $query4 = $conn->query($sql4);
 
-   $total_spend_product =  mysqli_num_rows($query3);
+   $total_spend_product =  mysqli_num_rows($query4);
 ?>
+<!-- ===============Latest Store Product show ======================-->
+
+<?php
+$sql_store = "SELECT * FROM product";
+$query_store = $conn->query($sql_store);
+
+$data_list = array();
+
+while ($data_store = mysqli_fetch_assoc($query_store)){ 
+    $product_id   = $data_store['product_id'];
+    $product_name = $data_store['product_name'];
+   
+    $data_list[$product_id ] = $product_name;
+}
+
+$sql_store =  "SELECT* FROM store_product ORDER BY store_product_id  DESC  LIMIT 10" ;
+$query_store = $conn->query($sql_store);
+
+?>
+<!-- ===============Latest Spend Product show ======================-->
+<?php
+$sql_spend = "SELECT * FROM product";
+$query_spend = $conn->query($sql_spend);
+
+$data_list = array();
+
+while ($data_spend = mysqli_fetch_assoc($query_spend)){ 
+    $product_id   = $data_spend['product_id'];
+    $product_name = $data_spend['product_name'];
+   
+    $data_list[$product_id ] = $product_name;
+}
+
+$sql_spend =  "SELECT* FROM spend_product ORDER BY spend_product_id  DESC  LIMIT 10" ;
+$query_spend = $conn->query($sql_spend);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,7 +94,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
   <div id="wrapper">
     <!-- Sidebar -->
    <?php
- include('sidebar.php');
+        include('sidebar.php');
    ?>
     <!-- Sidebar -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -270,7 +307,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $total_category; ?></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-primary"></i>
+                      <i class="far fa-fw fa-window-maximize fa-2x text-primary"></i>
                     </div>
                   </div>
                 </div>
@@ -286,7 +323,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo  $total_product;?> </div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-shopping-cart fa-2x text-success"></i>
+                      <i class="fas fa-fw fa-table fa-2x text-success"></i>
                     </div>
                   </div>
                 </div>
@@ -302,7 +339,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
                       <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?php  echo  $total_store_product ; ?></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-users fa-2x text-info"></i>
+                      <i class="fas fa-window-restore fa-2x text-info"></i>
                     </div>
                   </div>
                 </div>
@@ -318,7 +355,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><?php  echo  $total_spend_product; ?></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-warning"></i>
+                      <i class="fas fa-window-restore fa-2x text-warning"></i>
                     </div>
                   </div>
                 </div>
@@ -343,14 +380,25 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
                       </tr>
                     </thead>
                     <tbody>
+                      <?php
+                      $sl = 0;
+                         while ($data = mysqli_fetch_assoc($query_store)) {
+                          $store_product_id         = $data['store_product_id'];
+                          $store_product_name       = $data['store_product_name'];
+                          $store_product_quientity  = $data['store_product_quientity'];
+                          $store_product_entrydate  = $data['store_product_entrydate'];
+                          $sl++;
+                          
+
+                      ?>
                       <tr>
-                        <td><a href="#">RA0449</a></td>
-                        <td>Udin Wayang</td>
-                        <td>Nasi Padang</td>
-                        <td><span class="badge badge-success">Delivered</span></td>
+                        <td><?php echo $sl;  ?></td>
+                        <td><?php echo  $data_list[$store_product_name] ; ?></td>
+                        <td><?php echo  $store_product_quientity; ?></td>
+                        <td><?php echo  $store_product_entrydate ; ?></td>
                       
                       </tr>
-                     
+                     <?php } ?>
                     </tbody>
                   </table>
                 </div>
@@ -361,7 +409,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
             <div class="col-xl-6 col-lg-5 ">
                  <div class="card">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Latest Store Product</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Latest Spend Product</h6>
                 </div>
                 <div class="table-responsive">
                   <table class="table align-items-center table-flush">
@@ -375,13 +423,23 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td><a href="#">RA0449</a></td>
-                        <td>Udin Wayang</td>
-                        <td>Nasi Padang</td>
-                        <td><span class="badge badge-success">Delivered</span></td>
+                      <?php
+                      $sl=0;
+                           while ($data = mysqli_fetch_assoc($query_spend)) {
+                            $spend_product_id         = $data['spend_product_id'];
+                            $spend_product_name       = $data['spend_product_name'];
+                            $spend_product_quientity  = $data['spend_product_quientity'];
+                            $spend_product_entrydate  = $data['spend_product_entrydate'];
+                            $sl++;
+                      ?>
+                       <tr>
+                        <td><?php echo $sl;  ?></td>
+                        <td><?php echo  $data_list[$spend_product_name] ; ?></td>
+                        <td><?php echo  $spend_product_quientity; ?></td>
+                        <td><?php echo  $spend_product_entrydate ; ?></td>
                       
                       </tr>
+                     <?php } ?>
                      
                     </tbody>
                   </table>
