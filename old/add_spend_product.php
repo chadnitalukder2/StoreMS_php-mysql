@@ -39,7 +39,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
 <!--==================== start of right ================================-->  
             <div class="col-sm-9 border-start border-warning">
                       <div class="container p-3 m-3">
-                      <?php
+<?php
     if(isset($_GET ['spend_product_name'])){
      $spend_product_name        =  $_GET['spend_product_name'];
      $spend_product_quientity   =  $_GET['spend_product_quientity'];
@@ -58,7 +58,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
         }
         }
 
-    ?>
+?>
 
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
    

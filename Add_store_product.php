@@ -1,7 +1,7 @@
 
 <?php
 require('connection.php');
-
+require('myFunction.php');
 #=====================login page start=================
 session_start();
 $user_first_name = $_SESSION['user_first_name'];
@@ -12,30 +12,26 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
 <!-- =====================login page end================= -->
 <!-- =====================add product end================= -->
 <?php
-    if(isset($_GET ['product_name'])){
-     $Product_name        =  $_GET['product_name'];
-     $Product_category    =  $_GET['product_category'];
-     $Product_code        =  $_GET['product_code'];
-     $Product_entrydate   =  $_GET['product_entrydate'];
+    if(isset($_GET ['store_product_name'])){
+     $store_product_name        =  $_GET['store_product_name'];
+     $store_product_quientity   =  $_GET['store_product_quientity'];
+     $store_product_entrydate   =  $_GET['store_product_entrydate'];
+     
  
-    $sql =" INSERT INTO product (product_name, product_category, product_code, product_entrydate)
-           VALUES ('$Product_name ', '$Product_category' , '$Product_code ', '$Product_entrydate ')";
+    $sql =" INSERT INTO store_product (store_product_name, store_product_quientity, store_product_entrydate)
+           VALUES ('$store_product_name ', '$store_product_quientity' , '$store_product_entrydate')";
  
 
         if($conn->query($sql) == TRUE){
             echo "Data Inserted";
-            header('location: List_of_product.php'); #data insert korar por direct list page e jabe
         }
         else{
             echo "Data not Inserted";
         }
         }
         $date = date('d/m/Y');
-    ?>
-   <?php
-        $sql   = "SELECT * FROM category";
-        $query = $conn->query($sql);
-   ?>
+?>
+  
 
 
 
@@ -278,22 +274,16 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
                   
                     <div class="form-group">
                     <label for="select2Single">Product Name</label>
-                    <select class="select2-single form-control" name="product_category" id="select2Single">
+                    <select class="select2-single form-control"  name="store_product_name" id="select2Single">
                     <?php
-                        while ($data  = mysqli_fetch_assoc($query)){
-                            $category_id   =  $data['Category_id'];
-                            $category_name =  $data['Category_name'];
-                
-                            echo "<option value='$category_id' > $category_name </option>";
-                        }
+                      data_list('product', 'product_id', 'product_name');
                     ?>
-                    
                     </select>
                   </div>
 
                   <div class="form-group">
                       <label for="exampleInputCategory">Product Quientity</label>
-                      <input type="Text"  name="product_name" class="form-control" id="exampleInputCategory" aria-describedby="emailHelp"
+                      <input type="Text" name="store_product_quientity" class="form-control" id="exampleInputCategory" aria-describedby="emailHelp"
                         placeholder="Enter Product name">
                     </div>
 
@@ -304,7 +294,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
                         <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                         </div>
-                        <input type="text" name="product_entrydate" class="form-control" value="<?php echo $date ;  ?>" id="simpleDataInput">
+                        <input type="text"name="store_product_entrydate" class="form-control" value="<?php echo $date ;  ?>" id="simpleDataInput">
                       </div>
                   </div>
                     <button type="submit" value="submit" class="btn btn-primary">Submit</button>

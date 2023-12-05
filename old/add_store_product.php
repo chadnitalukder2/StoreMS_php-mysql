@@ -39,7 +39,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
 <!--==================== start of right ================================-->  
             <div class="col-sm-9 border-start border-warning">
                       <div class="container p-5 m-5">
-                      <?php
+<?php
     if(isset($_GET ['store_product_name'])){
      $store_product_name        =  $_GET['store_product_name'];
      $store_product_quientity   =  $_GET['store_product_quientity'];
