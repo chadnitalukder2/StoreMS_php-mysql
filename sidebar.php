@@ -39,8 +39,8 @@
         <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Product</h6>
-            <a class="collapse-item" href="Add_">Add Product</a>
-            <a class="collapse-item" href="form_advanceds.html">List Of Product</a>
+            <a class="collapse-item" href="Add_product.php">Add Product</a>
+            <a class="collapse-item" href="List_of_product.php">List Of Product</a>
           </div>
         </div>
       </li>
@@ -53,8 +53,8 @@
         <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Store Product</h6>
-            <a class="collapse-item" href="simple-tables.html">Add Store Product</a>
-            <a class="collapse-item" href="datatables.html">List Of Store Product</a>
+            <a class="collapse-item" href="Add_store_product.php">Add Store Product</a>
+            <a class="collapse-item" href="">List Of Store Product</a>
           </div>
         </div>
       </li>

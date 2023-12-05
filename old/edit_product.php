@@ -94,9 +94,9 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
             $category_id   =  $data['Category_id'];
             $category_name =  $data['Category_name'];
     ?>
-      <option value='<?php echo $category_id ?>' 
+      <option value='<?php echo $category_id; ?>' 
         <?php if($category_id  == $product_category){echo 'selected';}  ?> >
-        <?php echo $category_name ?>
+        <?php echo $category_name ;?>
         </option>";
         
     
@@ -105,7 +105,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
     </select><br><br>
    
     Product Code : <br>
-    <input type="text" name="product_code" value="<?php echo $product_code   ?>"><br><br>
+    <input type="text" name="product_code" value="<?php echo $product_code ;  ?>"><br><br>
     Product Entry Date : <br>
     <input type="date" name="product_entrydate" value="<?php echo $product_entrydate ?>"><br><br>
     <input type="text" name="product_id" value="<?php echo $product_id ?>" hidden>

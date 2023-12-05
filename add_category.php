@@ -22,6 +22,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
  
         if($conn->query($sql) == TRUE){
             echo "Data Inserted";
+            header('location: List_of_category.php'); #data insert korar por direct list page e jabe
         }
         else{
             echo "Data not Inserted";
@@ -75,7 +76,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
               </a>
               <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                 aria-labelledby="searchDropdown">
-                <form class="navbar-search">
+                <form class="navbar-search" action="" method="GET">
                   <div class="input-group">
                     <input type="text" class="form-control bg-light border-1 small" placeholder="What do you want to look for?"
                       aria-label="Search" aria-describedby="basic-addon2" style="border-color: #3f51b5;">
@@ -274,7 +275,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
                         placeholder="Enter Category">
                     </div>
                     <div class="form-group" id="simple-date1">
-                    <label for="simpleDataInput">Simple Data Input</label>
+                    <label for="simpleDataInput">Category Entry Date</label>
                       <div class="input-group date">
                         <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fas fa-calendar"></i></span>

@@ -7,14 +7,22 @@ $user_first_name = $_SESSION['user_first_name'];
 $user_last_name  = $_SESSION['user_last_name'];
 
 if(!empty($user_first_name) && !empty($user_last_name) ){  
+  ?>
+<!-- #=====================login page end================= -->
 
-#=====================login page end=================
-
-?>
 
 <?php
-       $sql =  "SELECT* FROM category" ;
-       $query = $conn->query($sql);
+$sql1 = "SELECT * FROM category";
+$query1 = $conn->query($sql1);
+
+$data_list = array();
+
+while ($data1 = mysqli_fetch_assoc($query1)){ 
+    $Category_id   = $data1['Category_id'];
+    $Category_name = $data1['Category_name'];
+   
+    $data_list[$Category_id ] = $Category_name;
+}
 ?>
 
 <!DOCTYPE html>
@@ -245,41 +253,47 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
           <div class="col-lg-12">
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">List Of Category</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">List Of Product</h6>
                 </div>
                 <div class="table-responsive p-3">
                   <table class="table align-items-center table-flush" id="dataTable">
                     <thead class="thead-light">
                       <tr>
-                      <th>ID</th>
+                        <th>ID</th>
+                        <th>Product Name</th>
                         <th>Category</th>
-                        <th>Date</th>
+                        <th>Code</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tfoot>
                       <tr>
                       <th>ID</th>
+                        <th>Product Name</th>
                         <th>Category</th>
-                        <th>Date</th>
+                        <th>Code</th>
                         <th>Action</th>
                       </tr>
                     </tfoot>
                     <tbody>
                    <?php
+                     $sql =  "SELECT* FROM product" ;
+                     $query = $conn->query($sql);
                    $sl= 0;
-                             while ($data = mysqli_fetch_assoc($query)) {
-                                $category_id = $data['Category_id'];
-                                $category_name = $data['Category_name'];
-                                $category_entrydate = $data['Category_entrydate'];
+                        while ($data = mysqli_fetch_assoc($query)) {
+                          $product_id       = $data['product_id'];
+                          $product_name     = $data['product_name'];
+                          $product_category = $data['product_category'];
+                          $product_code     = $data['product_code'];
                                 $sl++
                     ?>
                       <tr>
                       <td><?php echo $sl; ?></td>
-                        <td><?php echo $category_name; ?></td>
-                        <td><?php echo $category_entrydate; ?></td>
+                        <td><?php echo $product_name; ?></td>
+                        <td><?php echo $product_category; ?></td>
+                        <td><?php echo $product_code; ?></td>
                         <td>
-                           <a href="edit_category.php?id=<?php echo $category_id ; ?>" class=" btn btn-info">
+                           <a href="edit_product.php?id=<?php echo $product_id ; ?>" class=" btn btn-info">
                               <i class="fas fa-edit"></i>
                             </a>
 

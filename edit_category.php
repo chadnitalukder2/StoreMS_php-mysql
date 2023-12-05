@@ -7,15 +7,49 @@ $user_first_name = $_SESSION['user_first_name'];
 $user_last_name  = $_SESSION['user_last_name'];
 
 if(!empty($user_first_name) && !empty($user_last_name) ){  
-
-#=====================login page end=================
-
 ?>
+<!-- =====================login page end================= -->
 
 <?php
-       $sql =  "SELECT* FROM category" ;
-       $query = $conn->query($sql);
+    #===============Gat  data from category start=================================
+   if (isset($_GET['id'])) {
+    $getid = $_GET['id'];
+
+    $sql = "SELECT * FROM category
+            WHERE Category_id = $getid";
+    #===============show data start=================================
+    $query = $conn->query($sql);
+    $data = mysqli_fetch_assoc($query);
+
+    // Check if data exists before accessing the 'Category_id' index
+    if ($data) {
+        $Category_id = $data['Category_id'];
+        $Category_name = $data['Category_name'];
+        $Category_entrydate = $data['Category_entrydate'];
+    }
+}
+    #===============Get data from input start=================================
+
+    if(isset($_GET['Category_name'])){
+        $new_Category_name = $_GET['Category_name'];
+        $new_Category_entrydate = $_GET['Category_entrydate'];
+        $new_Category_id = $_GET['Category_id'];
+        
+    #===============update data start=================================
+
+    $sql1 = "UPDATE category
+    SET Category_name      = '$new_Category_name',
+        Category_entrydate = '$new_Category_entrydate'
+    WHERE Category_id      = '$new_Category_id'";
+if ($conn->query($sql1) === TRUE){
+echo "Update Successful";
+header('location: List_of_category.php'); #data insert korar por direct list page e jabe
+} else {
+echo "Not Update" . $conn->error;
+}
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,6 +66,10 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- Select2 -->
+  <link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+   <!-- Bootstrap DatePicker -->  
+  <link href="vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" >
 </head>
 
 <body id="page-top">
@@ -56,7 +94,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
               </a>
               <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                 aria-labelledby="searchDropdown">
-                <form class="navbar-search">
+                <form class="navbar-search" action="" method="GET">
                   <div class="input-group">
                     <input type="text" class="form-control bg-light border-1 small" placeholder="What do you want to look for?"
                       aria-label="Search" aria-describedby="basic-addon2" style="border-color: #3f51b5;">
@@ -241,56 +279,31 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
           </div>
 
           <div class="row mb-3">
-
+ <!-- Edit category -->
           <div class="col-lg-12">
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">List Of Category</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Edit Category</h6>
                 </div>
-                <div class="table-responsive p-3">
-                  <table class="table align-items-center table-flush" id="dataTable">
-                    <thead class="thead-light">
-                      <tr>
-                      <th>ID</th>
-                        <th>Category</th>
-                        <th>Date</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tfoot>
-                      <tr>
-                      <th>ID</th>
-                        <th>Category</th>
-                        <th>Date</th>
-                        <th>Action</th>
-                      </tr>
-                    </tfoot>
-                    <tbody>
-                   <?php
-                   $sl= 0;
-                             while ($data = mysqli_fetch_assoc($query)) {
-                                $category_id = $data['Category_id'];
-                                $category_name = $data['Category_name'];
-                                $category_entrydate = $data['Category_entrydate'];
-                                $sl++
-                    ?>
-                      <tr>
-                      <td><?php echo $sl; ?></td>
-                        <td><?php echo $category_name; ?></td>
-                        <td><?php echo $category_entrydate; ?></td>
-                        <td>
-                           <a href="edit_category.php?id=<?php echo $category_id ; ?>" class=" btn btn-info">
-                              <i class="fas fa-edit"></i>
-                            </a>
-
-                            <a href="#" class="btn btn-danger mx-2">
-                              <i class="fas fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <?php   } ?>
-                    </tbody>
-                  </table>
+                <div class="card-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="exampleInputCategory">Category Name</label>
+                      <input type="Text" name="Category_name" value="<?php echo  $Category_name  ?>" class="form-control" id="exampleInputCategory" aria-describedby="emailHelp"
+                        placeholder="Enter Category">
+                    </div>
+                    <div class="form-group" id="simple-date1">
+                    <label for="simpleDataInput">Simple Data Input</label>
+                      <div class="input-group date">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                        </div>
+                        <input type="text" name="Category_entrydate" value="<?php echo  $Category_entrydate  ?>"  class="form-control" value="<?php echo $date ;  ?>" id="simpleDataInput">
+                      </div>
+                  </div>
+                  <input type="text" name="Category_id" value="<?php echo  $Category_id  ?> "hidden>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -346,14 +359,106 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="js/ruang-admin.min.js"></script>
   
-  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script>
+  <!-- Select2 -->
+  <script src="vendor/select2/dist/js/select2.min.js"></script>
+   <!-- Bootstrap Datepicker -->
+   <script src="vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+   <script>
     $(document).ready(function () {
-      $('#dataTable').DataTable(); // ID From dataTable 
-      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+
+
+      $('.select2-single').select2();
+
+      // Select2 Single  with Placeholder
+      $('.select2-single-placeholder').select2({
+        placeholder: "Select a Province",
+        allowClear: true
+      });      
+
+      // Select2 Multiple
+      $('.select2-multiple').select2();
+
+      // Bootstrap Date Picker
+      $('#simple-date1 .input-group.date').datepicker({
+        format: 'dd/mm/yyyy',
+        todayBtn: 'linked',
+        todayHighlight: true,
+        autoclose: true,        
+      });
+
+      $('#simple-date2 .input-group.date').datepicker({
+        startView: 1,
+        format: 'dd/mm/yyyy',        
+        autoclose: true,     
+        todayHighlight: true,   
+        todayBtn: 'linked',
+      });
+
+      $('#simple-date3 .input-group.date').datepicker({
+        startView: 2,
+        format: 'dd/mm/yyyy',        
+        autoclose: true,     
+        todayHighlight: true,   
+        todayBtn: 'linked',
+      });
+
+      $('#simple-date4 .input-daterange').datepicker({        
+        format: 'dd/mm/yyyy',        
+        autoclose: true,     
+        todayHighlight: true,   
+        todayBtn: 'linked',
+      });    
+
+      // TouchSpin
+
+      $('#touchSpin1').TouchSpin({
+        min: 0,
+        max: 100,                
+        boostat: 5,
+        maxboostedstep: 10,        
+        initval: 0
+      });
+
+      $('#touchSpin2').TouchSpin({
+        min:0,
+        max: 100,
+        decimals: 2,
+        step: 0.1,
+        postfix: '%',
+        initval: 0,
+        boostat: 5,
+        maxboostedstep: 10
+      });
+
+      $('#touchSpin3').TouchSpin({
+        min: 0,
+        max: 100,
+        initval: 0,
+        boostat: 5,
+        maxboostedstep: 10,
+        verticalbuttons: true,
+      });
+
+      $('#clockPicker1').clockpicker({
+        donetext: 'Done'
+      });
+
+      $('#clockPicker2').clockpicker({
+        autoclose: true
+      });
+
+      let input = $('#clockPicker3').clockpicker({
+        autoclose: true,
+        'default': 'now',
+        placement: 'top',
+        align: 'left',
+      });
+
+      $('#check-minutes').click(function(e){        
+        e.stopPropagation();
+        input.clockpicker('show').clockpicker('toggleView', 'minutes');
+      });
+
     });
   </script>
 </body>
