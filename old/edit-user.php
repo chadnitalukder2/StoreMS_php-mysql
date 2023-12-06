@@ -38,7 +38,7 @@ if(!empty($user_first_name) && !empty($user_last_name) ){
 <!--==================== start of right ================================-->  
                 <div class="col-sm-9 border-start border-warning">
                     <div class="container p-5">
-                    <?php
+<?php
         #===============Get data from category start=================================
         if(isset($_GET['id'])){
             $getid = $_GET['id'];

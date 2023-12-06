@@ -3,7 +3,7 @@
         <div class="sidebar-brand-icon">
           <img src="img/logo/logo2.png">
         </div>
-        <div class="sidebar-brand-text mx-3">RuangAdmin</div>
+        <div class="sidebar-brand-text mx-3">Store MS Admin</div>
       </a>
       <hr class="sidebar-divider my-0">
       <li class="nav-item active">
@@ -105,8 +105,8 @@
         <div id="collapseUser" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Users</h6>
-            <a class="collapse-item" href="login.html">Add Users</a>
-            <a class="collapse-item" href="login.html">Users List</a>
+            <a class="collapse-item" href="Add_user.php">Add Users</a>
+            <a class="collapse-item" href="List_of_user.php">Users List</a>
           </div>
         </div>
       </li>

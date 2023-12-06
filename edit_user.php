@@ -7,23 +7,54 @@ $user_first_name = $_SESSION['user_first_name'];
 $user_last_name  = $_SESSION['user_last_name'];
 
 if(!empty($user_first_name) && !empty($user_last_name) ){  
-  ?>
-<!-- #=====================login page end================= -->
-
-
-<?php
-$sql1 = "SELECT * FROM category";
-$query1 = $conn->query($sql1);
-
-$data_list = array();
-
-while ($data1 = mysqli_fetch_assoc($query1)){ 
-    $Category_id   = $data1['Category_id'];
-    $Category_name = $data1['Category_name'];
-   
-    $data_list[$Category_id ] = $Category_name;
-}
 ?>
+<!-- =====================login page end================= -->
+<!-- =====================add product end================= -->
+<?php
+        #===============Get data from category start=================================
+        if(isset($_GET['id'])){
+            $getid = $_GET['id'];
+
+            $sql   = "SELECT * FROM user_table
+                    WHERE user_id = $getid";
+
+            #===============show data start=================================
+
+            $query =  $conn->query($sql);
+            $data  =  mysqli_fetch_assoc($query);
+  
+            $user_id         =  $data['user_id'];
+            $user_first_name =  $data['user_first_name'];
+            $user_last_name  =  $data['user_last_name'];
+            $user_email      =  $data['user_email'];
+            $user_password   =  $data['user_password'];
+        }
+
+        #===============Get data from input start=================================
+        if(isset($_GET['user_first_name'])){
+            $new_user_id         =  $_GET['user_id'];
+            $new_user_first_name =  $_GET['user_first_name'];
+            $new_user_last_name  =  $_GET['user_last_name'];
+            $new_user_email      =  $_GET['user_email'];
+            $new_user_password   =  $_GET['user_password'];
+
+            #===============update data start================================= 
+            $sql1 = "UPDATE user_table
+                SET user_first_name ='$new_user_first_name',
+                    user_last_name  ='$new_user_last_name',
+                    user_email      ='$new_user_email',
+                    user_password   ='$new_user_password'
+                WHERE user_id  = $new_user_id ";
+    
+            if($conn->query($sql1) == TRUE){
+                echo "Update Successful";
+            }
+            else{
+                echo "Not Update" . $conn->error;
+            }
+        }
+    ?>
+   
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,6 +71,7 @@ while ($data1 = mysqli_fetch_assoc($query1)){
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+   
 </head>
 
 <body id="page-top">
@@ -66,62 +98,40 @@ while ($data1 = mysqli_fetch_assoc($query1)){
           </div>
 
           <div class="row mb-3">
-
+ <!-- ADD Product -->
           <div class="col-lg-12">
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">List Of Product</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Add User's</h6>
                 </div>
-                <div class="table-responsive p-3">
-                  <table class="table align-items-center table-flush" id="dataTable">
-                    <thead class="thead-light">
-                      <tr>
-                        <th>ID</th>
-                        <th>Product Name</th>
-                        <th>Category</th>
-                        <th>Code</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tfoot>
-                      <tr>
-                      <th>ID</th>
-                        <th>Product Name</th>
-                        <th>Category</th>
-                        <th>Code</th>
-                        <th>Action</th>
-                      </tr>
-                    </tfoot>
-                    <tbody>
-                   <?php
-                     $sql =  "SELECT* FROM product" ;
-                     $query = $conn->query($sql);
-                   $sl= 0;
-                        while ($data = mysqli_fetch_assoc($query)) {
-                          $product_id       = $data['product_id'];
-                          $product_name     = $data['product_name'];
-                          $product_category = $data['product_category'];
-                          $product_code     = $data['product_code'];
-                                $sl++
-                    ?>
-                      <tr>
-                      <td><?php echo $sl; ?></td>
-                        <td><?php echo $product_name; ?></td>
-                        <td><?php echo $product_category; ?></td>
-                        <td><?php echo $product_code; ?></td>
-                        <td>
-                           <a href="edit_product.php?id=<?php echo $product_id ; ?>" class=" btn btn-info">
-                              <i class="fas fa-edit"></i>
-                            </a>
+                <div class="card-body">
+                  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                    <div class="form-group">
+                      <label for="exampleInputCategory">User's Firstname</label>
+                      <input type="Text"  name="user_first_name" value="<?php echo $user_first_name; ?>" class="form-control" id="exampleInputCategory" aria-describedby="emailHelp"
+                        placeholder="Enter User's Firstname">
+                    </div>       
 
-                            <a href="#" class="btn btn-danger mx-2">
-                              <i class="fas fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <?php   } ?>
-                    </tbody>
-                  </table>
+                  <div class="form-group">
+                      <label for="exampleInputCategory">User's LastName</label>
+                      <input type="Text" name="user_last_name" value="<?php echo $user_last_name; ?>" class="form-control" id="exampleInputCategory" aria-describedby="emailHelp"
+                        placeholder="Enter User's LastName">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputCategory">User's Email</label>
+                      <input type="email" name="user_email" value="<?php echo $user_email; ?>" class="form-control" id="exampleInputCategory" aria-describedby="emailHelp"
+                        placeholder="Enter User's Email">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputCategory"> User's Password</label>
+                      <input type="password" name="user_password" value="<?php echo $user_password; ?>" class="form-control" id="exampleInputCategory" aria-describedby="emailHelp"
+                        placeholder="Enter  User's Password">
+                    </div>
+
+
+                  
+                    <button type="submit" value="submit" class="btn btn-primary">Submit</button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -177,16 +187,7 @@ while ($data1 = mysqli_fetch_assoc($query1)){
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="js/ruang-admin.min.js"></script>
   
-  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script>
-    $(document).ready(function () {
-      $('#dataTable').DataTable(); // ID From dataTable 
-      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-    });
-  </script>
+  
 </body>
 
 </html>

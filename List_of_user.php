@@ -77,40 +77,45 @@ while ($data1 = mysqli_fetch_assoc($query1)){
                     <thead class="thead-light">
                       <tr>
                         <th>ID</th>
-                        <th>Product Name</th>
-                        <th>Category</th>
-                        <th>Code</th>
+                        <th>Fastname Name</th>
+                        <th>Lastname</th>
+                        <th>Email</th>
+                        <th>Password</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tfoot>
                       <tr>
-                      <th>ID</th>
-                        <th>Product Name</th>
-                        <th>Category</th>
-                        <th>Code</th>
+                        <th>ID</th>
+                        <th>Fastname Name</th>
+                        <th>Lastname</th>
+                        <th>Email</th>
+                        <th>Password</th>
                         <th>Action</th>
                       </tr>
                     </tfoot>
                     <tbody>
                    <?php
-                     $sql =  "SELECT* FROM product" ;
-                     $query = $conn->query($sql);
+                      $sql =  "SELECT* FROM user_table" ;
+                      $query = $conn->query($sql);
+               
                    $sl= 0;
-                        while ($data = mysqli_fetch_assoc($query)) {
-                          $product_id       = $data['product_id'];
-                          $product_name     = $data['product_name'];
-                          $product_category = $data['product_category'];
-                          $product_code     = $data['product_code'];
+                   while ($data = mysqli_fetch_assoc($query)) {
+                    $user_id         = $data['user_id'];
+                    $user_first_name = $data['user_first_name'];
+                    $user_last_name  = $data['user_last_name'];
+                    $user_email      = $data['user_email'];
+                    $user_password   = $data['user_password'];
                                 $sl++
                     ?>
                       <tr>
-                      <td><?php echo $sl; ?></td>
-                        <td><?php echo $product_name; ?></td>
-                        <td><?php echo $product_category; ?></td>
-                        <td><?php echo $product_code; ?></td>
+                        <td><?php echo $sl; ?></td>
+                        <td><?php echo $user_first_name; ?></td>
+                        <td><?php echo $user_last_name; ?></td>
+                        <td><?php echo $user_email; ?></td>
+                        <td><?php echo $user_password; ?></td>
                         <td>
-                           <a href="edit_product.php?id=<?php echo $product_id ; ?>" class=" btn btn-info">
+                           <a href="edit_user.php?id=<?php echo $user_id ; ?>" class=" btn btn-info">
                               <i class="fas fa-edit"></i>
                             </a>
 
